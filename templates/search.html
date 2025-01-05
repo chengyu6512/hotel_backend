@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="container mt-5">
+    {% include 'layout/menu.html' %}
+
+    <div class="content">
+        <h1>Searching</h1>
+        <!-- Your dashboard's content goes here -->
+        <form method="POST">
+            <p>
+                <label for="booking_id">Booking ID:</label>
+                <input type="text" id="booking_id" name="booking_id">
+            </p>
+            <p>
+                <label for="guest_name">Guest Name:</label>
+                <input type="text" id="guest_name" name="guest_name">
+            </p>
+            <p>
+                <label for="start_date">Start Date:</label>
+                <input type="date" id="start_date" name="start_date">
+            </p>
+            <p>
+                <label for="end_date">End Date:</label>
+                <input type="date" id="end_date" name="end_date">
+            </p>
+            <p>
+                <button type="submit">Search</button>
+            </p>
+        </form>
+    
+        {% if bookings %}
+            <h2>Search Results</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Guest Name</th>
+                        <th>Room Number</th>
+                        <th>Check-In Date</th>
+                        <th>Check-Out Date</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in bookings %}
+                    <tr>
+                        <td>{{ booking.booking_id }}</td>
+                        <td>{{ booking.guest.guest_name }}</td>
+                        <td>{{ booking.room_number }}</td>
+                        <td>{{ booking.check_in_date }}</td>
+                        <td>{{ booking.check_out_date }}</td>
+                        <td>{{ booking.total_price }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No bookings found.</p>
+        {% endif %}
+    </div>
+
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+</body>
+</html>
+

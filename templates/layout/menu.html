@@ -1,0 +1,16 @@
+<nav class="sidebar">
+    <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="{{ url_for('index') }}">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('show_bookings') }}">Bookings</a>
+            </li>
+            <!-- Additional navigation items -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('search') }}">Searching</a>
+            </li>
+        </ul>
+    </div>
+</nav>
