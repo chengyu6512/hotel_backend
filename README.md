@@ -1,1 +1,1 @@
-This is hotel_backend.
+This is hotel_backend
