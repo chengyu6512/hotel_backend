@@ -35,3 +35,24 @@ body {
     margin-left: 150px;
     padding: 20px;
 }
+.dashboard-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+.dashboard-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #007bff;
+}
+.table th, .table td {
+    vertical-align: middle;
+}
+.content {
+    margin-top: 30px;
+}

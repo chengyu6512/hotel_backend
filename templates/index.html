@@ -4,35 +4,12 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <style>
-        .dashboard-card {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-bottom: 20px;
-            background-color: #fff;
-        }
-        .dashboard-header {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-align: center;
-            color: #007bff;
-        }
-        .table th, .table td {
-            vertical-align: middle;
-        }
-        .content {
-            margin-top: 30px;
-        }
-    </style>
 </head>
 <body class="container">
     {% include 'layout/menu.html' %}
 
     <div class="content">
-        <h1>Hotel Management</h1>
+        <h1 class="text-center my-4">Hotel Management</h1>
 
         <!-- Today's Check-In Guests -->
         <div class="dashboard-card">
