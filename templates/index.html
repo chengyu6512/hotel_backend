@@ -1,17 +1,120 @@
-<!DOCTYPE html>
-<html>
+<!-- <!DOCTYPE html> -->
+<!-- <html>
 <head>
-    <title>Admin Dashboard</title>
+    <title>Admin Dashboard</title> -->
     <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="container mt-5">
     {% include 'layout/menu.html' %}
 
     <div class="content">
-        <h1>Hotel Management</h1>
+        <h1>Hotel Management</h1> -->
         <!-- Your dashboard's content goes here -->
+    <!-- </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .dashboard-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+        .dashboard-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #007bff;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+        .content {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body class="container">
+    {% include 'layout/menu.html' %}
+
+    <div class="content">
+        <h1 class="text-center my-4">Hotel Management</h1>
+
+        <!-- Today's Check-In Guests -->
+        <div class="dashboard-card">
+            <div class="dashboard-header">Today's Check-In Guests</div>
+            <table class="table table-hover table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Guest Name</th>
+                        <th>Contact Info</th>
+                        <th>Room Number</th>
+                        <th>Check-In Date</th>
+                        <th>Check-Out Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in check_in_today %}
+                    <tr>
+                        <td>{{ booking.guest.guest_name }}</td>
+                        <td>{{ booking.guest.contact_info }}</td>
+                        <td>{{ booking.room.room_number }}</td>
+                        <td>{{ booking.check_in_date }}</td>
+                        <td>{{ booking.check_out_date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% if not check_in_today %}
+            <p class="text-center text-muted">No check-ins scheduled for today.</p>
+            {% endif %}
+        </div>
+
+        <!-- Today's Check-Out Guests -->
+        <div class="dashboard-card">
+            <div class="dashboard-header">Today's Check-Out Guests</div>
+            <table class="table table-hover table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Guest Name</th>
+                        <th>Contact Info</th>
+                        <th>Room Number</th>
+                        <th>Check-In Date</th>
+                        <th>Check-Out Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in check_out_today %}
+                    <tr>
+                        <td>{{ booking.guest.guest_name }}</td>
+                        <td>{{ booking.guest.contact_info }}</td>
+                        <td>{{ booking.room.room_number }}</td>
+                        <td>{{ booking.check_in_date }}</td>
+                        <td>{{ booking.check_out_date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% if not check_out_today %}
+            <p class="text-center text-muted">No check-outs scheduled for today.</p>
+            {% endif %}
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -19,4 +122,3 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
-

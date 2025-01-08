@@ -42,9 +42,25 @@ class Room(db.Model):
     max_guests = db.Column(db.Integer)
 
 # Route to show the booking list
-@app.route('/')
+# @app.route('/')
+# def index():
+#     return render_template('index.html')
+@app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html')
+    today = datetime.now().date()
+    try:
+        # 查詢今天的入住與退房資料
+        check_in_today = Booking.query.filter_by(check_in_date=today).all()
+        check_out_today = Booking.query.filter_by(check_out_date=today).all()
+
+        # 渲染模板並傳遞數據
+        return render_template(
+            'index.html',
+            check_in_today=check_in_today,
+            check_out_today=check_out_today
+        )
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
 
 @app.route('/search')
 def search():
@@ -118,6 +134,36 @@ def search_bookings():
         bookings = query.all()
 
     return render_template('search.html', bookings=bookings)
+
+@app.route('/today_check_in_check_out', methods=['GET'])
+def today_check_in_check_out():
+    today = datetime.now().date()
+    try:
+        check_in_guests = Booking.query.filter_by(check_in_date=today).all()
+        check_out_guests = Booking.query.filter_by(check_out_date=today).all()
+
+        response = {
+            "status": "success",
+            "check_in_guests": [
+                {
+                    "booking_id": b.booking_id,
+                    "guest_name": b.guest.guest_name,
+                    "room_number": b.room.room_number,
+                    "contact_info": b.guest.contact_info,
+                } for b in check_in_guests
+            ],
+            "check_out_guests": [
+                {
+                    "booking_id": b.booking_id,
+                    "guest_name": b.guest.guest_name,
+                    "room_number": b.room.room_number,
+                    "contact_info": b.guest.contact_info,
+                } for b in check_out_guests
+            ]
+        }
+        return jsonify(response)
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
